@@ -1,0 +1,131 @@
+%=======================
+%= DOKUMENTENDEFINIION =
+%=======================
+
+%---------------
+% DOKUMENTENART
+%---------------
+
+\documentclass[
+a4paper,		% Papiergröße
+12pt,			% Schriftgröße
+onecolumn,		% Einspaltiger Satz
+oneside,		% Einseitiger Satz
+openright,		% Kapitelbeginn nur auf der rechten Seite
+parskip,		% Legt den Abstand zwischen den nachfolgenden Absätzen fest
+liststotoc,		% Tabellen und Abbildungsverzeichnis ohne Nummerierung
+bibtotocnumbered,	% Literaturverzeichnis nummerieren und aufführen
+appendixprefix,		% Anhang vor Anhang-Nummerierung
+chapterprefix=true,	% Kapitel + Nr. vor dem Kapitelnamen  
+]{scrreprt}		% Standartklasse für Erstellung von Studienarbeiten
+
+
+%--------------
+% ZUSATZPAKETE
+%--------------
+
+\usepackage[left=3cm, right=2cm, top=2cm, bottom=2cm]{geometry} % Seitenlayout
+\usepackage{amsmath}            % Formeln
+\usepackage[ngerman]{babel}     % Neue deutsche Silbentrennung
+\usepackage[T1]{fontenc}        % Korrektes Trennen von Wörtern mit Umlauten und Akzenten.
+\usepackage{graphicx}	        % Abbildungen
+\usepackage[utf8]{inputenc}     % Zeichenkodierung für UTF-8 (Unicode) falls Editor es unterstützt (bevorzugt)
+% \usepackage[latin1]{inputenc} % Zeichenkodierung unter Windows für Umlaute und Sonderzeichen falls kein UTF-8 im Editor
+\usepackage{caption}			% Beschriftungen (um Anhangsdaten im Abb/Tab-verz. zu löschen)
+\usepackage{booktabs}			% für besseren Tabellen mit top,mid und bottomrule
+\usepackage{multirow}			% Spaltenzusammenfassung in der Tabelle
+\usepackage{setspace}           % für singlespacing Umgebung
+\usepackage{makecell}           % für Tabellen
+\usepackage{tabularx}           % für Tabellen
+\usepackage[
+backend=biber,
+style=numeric,
+sorting=none
+]{biblatex}                     % Literatur
+
+%--------------------
+% Literatur
+%--------------------
+
+% Literaturdatenbank (Datei mit Einträgen)
+\addbibresource{bibliography.bib}
+
+% Einstellungen um URLs auszublenden
+\ExecuteBibliographyOptions{
+isbn=false, %keine isbn anzeigen
+url=false %keine url anzeigen
+}
+
+% MISC in ONLINE ändern da dies oft von Zotero falsch einsortiert wird
+\DeclareSourcemap{
+  \maps[datatype=bibtex, overwrite=true]{
+    \map{
+      \step[typesource=misc, typetarget=online]
+    }
+  }
+}
+
+%--------------------
+% FORMATDEFINITIONEN
+%--------------------
+
+\linespread{1.5}\selectfont			% Allgemeiner Zeilenabstand
+\numberwithin{equation}{chapter}		% Zweistzufige Formelnummerierung
+\clubpenalty = 10000				% Unterdrücken von Schusterjungen und Hurenkindern
+\widowpenalty = 10000
+\displaywidowpenalty = 10000
+\makeindex					% Programm zur Indexerstellung (Sortierung und Formatierung von Eintraegen)
+\addtokomafont{disposition}{\rmfamily} 		% Serifen-Schrift für Überschriften
+\setcounter{secnumdepth}{2}			% Tiefe der Nummerierung im Inhaltsverzeichnis
+
+%========================
+%= BEGINN DES DOKUMENTES =
+%========================
+
+\begin{document}
+
+%----------------------------
+% DECKBLATT, AUFGABENSTELLUNG & VERZEICHNISSE ...
+%----------------------------
+
+\pagestyle{empty}
+\include{00_Deckblatt}			% Deckblatt
+\include{00_Aufgabenstellung}
+\begin{singlespacing}
+\include{00_Inhaltsverzeichnis}	% Inhaltsverzeichnis
+\end{singlespacing}
+\setcounter{page}{1} 				% Hier mit Seitenzahlen beginnen
+
+% Symbolverzeichnis
+\addcontentsline{toc}{chapter}{Symbolverzeichnis}
+\include{00_Symbolverzeichnis}	% Symbolverzeichnises
+
+%----------------------------
+% BEISPIELE FÜR VERSCHIEDENE FUNKTIONEN (AM ENDE WIEDER LÖSCHEN!)
+%----------------------------
+
+% Beispiele
+\input{00_Beispiele.tex}
+
+%----------------------------
+% EIGENTLICHE INHALT
+%----------------------------
+
+\input{01_Einleitung.tex}
+\input{02_Grundlagen.tex}
+\input{03_Material_und_Methoden.tex}
+\input{04_Ergebnisse.tex}
+\input{05_Diskussion.tex}
+\input{06_Zusammenfassung_Ausblick.tex}
+\printbibliography[heading=bibintoc]
+
+%----------------------------
+% ANHANG
+%----------------------------
+\appendix
+\chapter*{Anhang}
+\thispagestyle{empty}				% keine Anzeige Seitenzahlen und Kapitelüberschriften
+\addcontentsline{toc}{chapter}{Anhang}
+\include{ANHANG/Beispiel_Anhang.tex}			% Anhang immer nur mit sections!
+
+\end{document}

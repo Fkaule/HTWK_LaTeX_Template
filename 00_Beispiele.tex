@@ -1,0 +1,80 @@
+\chapter{Beispiele}
+
+\section{Einbinden von Grafiken}
+
+\begin{figure}[hbtp]
+\centering
+\includegraphics[width=0.5\textwidth]{example-image-a}
+\caption{Einbinden einer Grafik}
+\end{figure}
+
+\begin{figure}[hbtp]
+\centering
+\begin{minipage}{0.45\textwidth}
+\includegraphics[width=\textwidth]{example-image-b}
+\end{minipage}
+\hspace{0.05\textwidth}
+\begin{minipage}{0.45\textwidth}
+\includegraphics[width=\textwidth]{example-image-c}
+\end{minipage}
+\caption{Einbinden von zwei Grafiken nebeneinander}
+\end{figure}
+
+\section{Verwendung von Formeln}
+
+Einfache Formeln können mit dem \texttt{amsmath}-Paket geschrieben werden:
+
+\begin{equation}
+f(x) = x^2
+\end{equation}
+
+Spezielle Formeln können mit den Befehlen des \texttt{amsmath}-Pakets geschrieben werden:
+
+\begin{align}
+\dot{x} &= f(x,t) \\
+\ddot{x} &= \frac{d}{dt} \dot{x}
+\end{align}
+
+\section{Erstellen von Tabellen}
+
+Tabellen können mit dem \texttt{tabular}-Umgebung erstellt werden:
+
+\begin{table}[!hbtp]
+\begin{tabular}{|l|c|r|}
+\hline
+Spalte 1 & Spalte 2 & Spalte 3 \\
+\hline
+Zeile 1 & 100 & 200 \\
+Zeile 2 & 300 & 400 \\
+\hline
+\end{tabular}
+\end{table}
+
+komplexere Tabelle:
+
+\begin{table}[!hbtp]
+\begin{tabular}{@{} lcccc @{}}
+ \toprule
+ \hfil\multirow{2}{*}{\textbf{Name}}    & \multicolumn{2}{c}{\textbf{Overhead1}}  & \multicolumn{2}{c}{\textbf{Overhead2}}  \\
+                             & Header1  & Header2  & Header3  & Header4  \\
+ \midrule
+ Name A & \makecell[c]{text oben \\ text unten} & text text & text text & text text \\
+ Name B & text text & text text & text text text & text text \\
+ \bottomrule
+ \end{tabular}
+\end{table}
+
+\section{Literaturverweis}
+
+Der komplette Workflow wird nun an zwei verschiedenen Zitierstilen (numeric und alphabetic) dargestellt:
+
+Nur die Quellen aus der Bib-Datei die mit \cite{dirac} referenziert werden, werden auch im Literaturverzeichnis dargestellt. Die Bib-Datei kann dabei also auch viel größer sein und nicht verwendete Quellen werden einfach nicht angezeigt.
+
+Um mehrere Quellen (z.B. label1, label2 und label3) zu zitieren werden diese per Komma in \cite{dirac,einstein,knuth-fa} Befehl getrennt:
+
+Um auf eine bestimmte Seite innerhalb der Quelle zu referenzieren kann dies mit eckigen Klammern als Option an den \cite[S. 8]{einstein} Befehl verwendet werden:
+
+\section{Symbolverzeichnis}
+
+ToDo...
+
